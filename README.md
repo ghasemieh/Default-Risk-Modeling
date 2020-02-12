@@ -2,7 +2,7 @@
 Data Analysis and Modeling
 
 <p align="center">
-   <img src="https://github.com/ghasemieh/Default-Risk-Modeling/blob/master/image/defaultRisk.jpg">
+   <img src="/image/defaultRisk.jpg">
 </p>
 
 
