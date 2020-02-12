@@ -117,13 +117,14 @@ As expected, the most important features are those dealing with EXT_SOURCE and D
 In this step I only create Light Gradient Boosting control model to compare the further step results with it. The score of 0.74533 reached when submitted the result. 
 Result: The control slightly overfits because the training score is higher than the validation score.
 
-|fold	|train	|valid|
-|0	| 0.809199	|0.760273|
-|1	| 0.812654	|0.761398|
-|2	| 0.809734	|0.750451|
-|3	| 0.811121	|0.760245|
-|4	| 0.802236	|0.760972|
-|overall	|0.808989	|0.758635|
+| fold	   | train   	|valid   |
+|-------- | --------- | ------ |
+| 0	      | 0.809199	|0.760273|
+| 1	      | 0.812654	|0.761398|
+| 2	      | 0.809734	|0.750451|
+| 3     	| 0.811121	|0.760245|
+| 4     	| 0.802236	|0.760972|
+| overall	|0.808989	  |0.758635|
 
 ![Image of R6](/image/r6.png)
 
