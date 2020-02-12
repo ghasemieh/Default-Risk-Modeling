@@ -103,6 +103,7 @@ Several model had been built to check the accuracy and the score given by Kaggle
 
 #### 1st Model: Logistic Regression
 As building my baseline model, I used Logistic Regression from Scikit-Learn library. I used only the main table (Application) to build the model. 
+
 -	Result: This scores 0.68035 when submitted which probably shows that the engineered features do not help in this model.
 
 #### 2nd Model: Random Forest
@@ -111,11 +112,13 @@ The second model was built on the same dataset to figure out the feature importa
 ![Image of R5](/image/r5.png)
 
 As expected, the most important features are those dealing with EXT_SOURCE and DAYS_BIRTH. We see that there are only a handful of features with a significant importance to the model, which suggests we may be able to drop many of the features without a decrease in performance (and we may even see an increase in performance.)
+
 -	Result: This model score is 0.67508 when submitted. No progress in score!
 
 #### 3rd Model: Application Data set and Light Gradient Boosting
 In this step I only create Light Gradient Boosting control model to compare the further step results with it. The score of 0.74533 reached when submitted the result. 
-Result: The control slightly overfits because the training score is higher than the validation score.
+
+- Result: The control slightly overfits because the training score is higher than the validation score.
 
 | fold	   | train   	|valid   |
 |-------- | --------- | ------ |
@@ -134,6 +137,7 @@ The objective of feature engineering is to create new features to represent as m
 ![Image of R7](/image/r7.png)
 
 The data set dimension increased from 122 to 333 columns. To decrease the number of features the method below were used:
+
 1- Missing Values: If a column has more than 90% of missing values, it should be removed.
   -	Result: No column has been removed.
 
