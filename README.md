@@ -2,7 +2,7 @@
 Data Analysis and Modeling
 
 <p align="center">
-  <img src="/image/defaultRisk.jpg">
+  ![Image of Bug](/image/defaultRisk.png)
 </p>
 
 
