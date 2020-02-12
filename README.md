@@ -128,22 +128,43 @@ Result: The control slightly overfits because the training score is higher than 
 
 ![Image of R6](/image/r6.png)
 
+#### 4th Model: Manual Feature Engineering and Light Gradient Boosting
+The objective of feature engineering is to create new features to represent as much information from an entire dataset in one table. In this modeling I joint the bureau and bureau_balance table to the application table and calculated the correlations. This correlation Heatmap shows that some of the new created values from bureau data set has some correlation with target.
+
 ![Image of R7](/image/r7.png)
 
-![Image of R8](/image/r1.png)
+The data set dimension increased from 122 to 333 columns. To decrease the number of features the method below were used:
+1- Missing Values: If a column has more than 90% of missing values, it should be removed.
+  -	Result: No column has been removed.
 
-![Image of R1](/image/r1.png)
+2- Collinear Variables: If two variable has strong correlation one should be removed.
+  -	Result: 134 of columns to remove. Also 53% of top 100 features created from the bureau data.
 
-![Image of R1](/image/r1.png)
+For modeling I used light gradient boosting to build our model. First I build a model with the 333 columns and then built it again after removing 134 columns. At the end I joint all tables application and build a giant one and build a model based on that.
 
+#### 5th Model: Automated Feature Engineering and Light Gradient Boosting
+In these step I used featuretools library. Automated feature engineering aims to help the data scientist with the problem of feature creation by automatically building hundreds or thousands of new features from a dataset. The data dimensions increased to 2221 features. Many of the have collinearity with each other and those over 90% were removed.
 
+As an example: MEAN(credit.AMT_PAYMENT_TOTAL_CURRENT)) and MAX(previous.MEAN(credit.AMT_PAYMENT_TOTAL_CURRENT) have 0.9998 correlation.
+
+### Result of the modeling
+The score of 0.74169 was obtain. Less that the manual feature selection. It happen because I used this feature in basic mode without using advanced features that this library gives us. 
+
+| fold  |	train	  | valid  |
+| ----- | ------- | ------ |
+|  0	  |0.851178	|0.759790|
+|	 1	  |0.844807	|0.750831|
+|  2	  |0.834149	|0.753747|
+|  3	  |0.879426	|0.750094|
+|  4	  |0.879259	|0.755583|
+|overall|0.857764	|0.753715|
+ 
+By looking at the feature importance over all the modeling steps, we can infer that the EXT_SOURCE_1, EXT_SOURCE_2, EXT_SOURCE_3 and the DAYS_BIRTH have the most impact on the model. So as a conclusion we can say that those applicants who have better external scores and also who are older are less likely to default.
 
 ## Conclusions
 The aim of this project was building a predictive model to calculate the default risk probability of loan applicants based on the applicants’ application and their financial history from different financial organizations. To build this model data was manipulated and by using manual and automated feature engineering, new variables were built to maximize the accuracy of the model. Also for building the model Logistic Regression, Random Forest and Light Gradient Boosting were used. Since the data dimensions were so broad it is not that possible to say which attribute had the most impact on the target however it can be mentioned that EXT_SOURCE_1, EXT_SOURCE_2, EXT_SOURCE_3, and the DAYS_BIRTH were the most important feature that contributed to the target. So as a conclusion we can say that those applicants who have better external scores and also who are older are less likely to default.
 
 Finally, the best score was 0.77 which is acceptable and located in the top 10% place in the ranking of competitors.
-
-
 
 ## References
 - George, G., Sinha, A., Murali, T. (2008), Governance, Risk and Compliance. www.Infosys.Com/Finsights/ Creditrisk-Management.Pdf.
