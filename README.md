@@ -1,7 +1,10 @@
 # Default Risk Modeling
 Data Analysis and Modeling
 
-![Image of Default Risk](/image/defaultRisk.jpg)
+<p align="center">
+  <img src="/image/defaultRisk.jpg">
+</p>
+
 
 ## Introduction 
 Home Credit is looking for a model to predict the possibility of loan repayment for their clients based on the information about applicants’ applications, credit card history, account balance and etc. The dataset contains of 7 relational tables. 
@@ -86,17 +89,25 @@ By doing EDA some information has been extracted from the application data set a
 
 We can infer that younger people may experience more default than elders.
 
-![Image of R1](/image/r1.png)
+<p align="center">
+  <img width="480" height="300" src="/image/r1.png">
+</p>
 
-![Image of R2](/image/r2.png)
+<p align="center">
+  <img width="480" height="300" src="/image/r2.png">
+</p>
 
 Correlation Heatmap between top features and Target
 
-![Image of R3](/image/r3.png)
+<p align="center">
+  <img width="480" height="300" src="/image/r3.png">
+</p>
 
 All three EXT_SOURCE features have negative correlations with the target, indicating that as the value of the EXT_SOURCE increases, the client is more likely to repay the loan. We can also see that DAYS_BIRTH is positively correlated with EXT_SOURCE_1 indicating that maybe one of the factors in this score is the client age.
 
-![Image of R4](/image/r4.png)
+<p align="center">
+  <img src="/image/r4.png">
+</p>
 
 ### Modeling
 Several model had been built to check the accuracy and the score given by Kaggle. The below is the result of each method:
@@ -109,7 +120,9 @@ As building my baseline model, I used Logistic Regression from Scikit-Learn libr
 #### 2nd Model: Random Forest
 The second model was built on the same dataset to figure out the feature importance as show below.
 
-![Image of R5](/image/r5.png)
+<p align="center">
+  <img src="/image/r5.png">
+</p>
 
 As expected, the most important features are those dealing with EXT_SOURCE and DAYS_BIRTH. We see that there are only a handful of features with a significant importance to the model, which suggests we may be able to drop many of the features without a decrease in performance (and we may even see an increase in performance.)
 
@@ -129,12 +142,16 @@ In this step I only create Light Gradient Boosting control model to compare the 
 | 4     	| 0.802236	|0.760972|
 | overall	|0.808989	  |0.758635|
 
-![Image of R6](/image/r6.png)
+<p align="center">
+  <img  src="/image/r6.png">
+</p>
 
 #### 4th Model: Manual Feature Engineering and Light Gradient Boosting
 The objective of feature engineering is to create new features to represent as much information from an entire dataset in one table. In this modeling I joint the bureau and bureau_balance table to the application table and calculated the correlations. This correlation Heatmap shows that some of the new created values from bureau data set has some correlation with target.
 
-![Image of R7](/image/r7.png)
+<p align="center">
+  <img src="/image/r7.png">
+</p>
 
 The data set dimension increased from 122 to 333 columns. To decrease the number of features the method below were used:
 
