@@ -2,7 +2,7 @@
 Data Analysis and Modeling
 
 <p align="center">
-  ![Image of Bug](/image/defaultRisk.png)
+   <img src="https://github.com/ghasemieh/Default-Risk-Modeling/blob/master/image/defaultRisk.jpg">
 </p>
 
 
