@@ -20,6 +20,7 @@ Boyes, Hoffman and Low(1989)  suggested a model of credit assessment focuses on 
 Srinivasan and Kim(1987)  applied four statistical models: multiple discriminant analysis (MDA), logistic regression (logit), goal programming (GP) and recursive partitioning algorithm (RPA), and a judgmental model based on the Analytic Hierarchy Process (AHP). The data employed for the study has been provided by an anonymous Fortune 500 corporation. They found that (nonparametric) recursive partitioning methods provide greater information than simultaneous partitioning procedure and the judgmental model performs as well as statistical model.
 
 Hillman(2014)  used a binary logistic regression model to compare borrowers who defaulted against those who made standard “on‑time” repayments. The data is from Postsecondary Students (BPS) survey for 2003–2004 through 2008–2009. Participants in this survey (n ≈ 16,700) attended public, private nonprofit, and private for‑profit institutions in the United States and approximately 9,500 of the respondents had taken out federal student loans while enrolled in college. He found that students who attend for‑profit colleges are systematically (and to a greater magnitude) more likely to default than students attending other sectors of higher education. Also, students who come from upper‑income families or who are not first‑generation students face lower odds of defaulting. Alternatively, lower‑income students, minoritized students, and students who care for dependents face greater odds of defaulting when compared to their White and upper‑income peers who do not care for dependents.
+
 Bellotti and Crook(2009)   applied survival analysis to build the default model using credit card account dataset from a UK bank which includes a period of credit card accounts opened from 1997 to mid-2005 with the total number of 100,000 accounts with application variables such as income, age, housing and employment status along with a bureau score taken at the time of application. They showed that probability of default is affected by general conditions in the economy over time and these macroeconomic variables cannot readily be included in logistic regression models. However, survival analysis provides a framework for their inclusion as time-varying covariates. They believe that a credit application scoring model involves predicting the probability that an applicant will default over a given future time period in terms of characteristics of the applicant measured at the time of application. Moreover, although LR has become a standard method for estimating applicant scoring models (Thomas et al, 2002) , using survival analysis for credit scoring allows us to model not just if a borrower will default, but when. The advantages of this method are that 
 
 - survival models naturally match the loan default process and so incorporate situations when a case has not defaulted in the observation period
@@ -80,3 +81,82 @@ The dataset has 7 tables. In this project I will try to use other table than app
 
 ## Results
 
+### Exploratory Data Analysis
+By doing EDA some information has been extracted from the application data set as below:
+
+We can infer that younger people may experience more default than elders.
+
+![Image of R1](/image/r1.png)
+
+![Image of R2](/image/r2.png)
+
+Correlation Heatmap between top features and Target
+
+![Image of R3](/image/r3.png)
+
+All three EXT_SOURCE features have negative correlations with the target, indicating that as the value of the EXT_SOURCE increases, the client is more likely to repay the loan. We can also see that DAYS_BIRTH is positively correlated with EXT_SOURCE_1 indicating that maybe one of the factors in this score is the client age.
+
+![Image of R4](/image/r4.png)
+
+### Modeling
+Several model had been built to check the accuracy and the score given by Kaggle. The below is the result of each method:
+
+#### 1st Model: Logistic Regression
+As building my baseline model, I used Logistic Regression from Scikit-Learn library. I used only the main table (Application) to build the model. 
+-	Result: This scores 0.68035 when submitted which probably shows that the engineered features do not help in this model.
+
+#### 2nd Model: Random Forest
+The second model was built on the same dataset to figure out the feature importance as show below.
+
+![Image of R5](/image/r5.png)
+
+As expected, the most important features are those dealing with EXT_SOURCE and DAYS_BIRTH. We see that there are only a handful of features with a significant importance to the model, which suggests we may be able to drop many of the features without a decrease in performance (and we may even see an increase in performance.)
+-	Result: This model score is 0.67508 when submitted. No progress in score!
+
+#### 3rd Model: Application Data set and Light Gradient Boosting
+In this step I only create Light Gradient Boosting control model to compare the further step results with it. The score of 0.74533 reached when submitted the result. 
+Result: The control slightly overfits because the training score is higher than the validation score.
+
+|fold	|train	|valid|
+|0	| 0.809199	|0.760273|
+|1	| 0.812654	|0.761398|
+|2	| 0.809734	|0.750451|
+|3	| 0.811121	|0.760245|
+|4	| 0.802236	|0.760972|
+|overall	|0.808989	|0.758635|
+
+![Image of R6](/image/r6.png)
+
+![Image of R7](/image/r7.png)
+
+![Image of R8](/image/r1.png)
+
+![Image of R1](/image/r1.png)
+
+![Image of R1](/image/r1.png)
+
+
+
+## Conclusions
+The aim of this project was building a predictive model to calculate the default risk probability of loan applicants based on the applicants’ application and their financial history from different financial organizations. To build this model data was manipulated and by using manual and automated feature engineering, new variables were built to maximize the accuracy of the model. Also for building the model Logistic Regression, Random Forest and Light Gradient Boosting were used. Since the data dimensions were so broad it is not that possible to say which attribute had the most impact on the target however it can be mentioned that EXT_SOURCE_1, EXT_SOURCE_2, EXT_SOURCE_3, and the DAYS_BIRTH were the most important feature that contributed to the target. So as a conclusion we can say that those applicants who have better external scores and also who are older are less likely to default.
+
+Finally, the best score was 0.77 which is acceptable and located in the top 10% place in the ranking of competitors.
+
+
+
+## References
+- George, G., Sinha, A., Murali, T. (2008), Governance, Risk and Compliance. www.Infosys.Com/Finsights/ Creditrisk-Management.Pdf.
+- Zakrzewska, D. (2007). On Integrating Unsupervised and Supervised Classification for Credit Risk Evaluation. Information Technology and Control, 36, 98-102
+- Lai, K. K., Yu, L., Wang, S., Zhou, L. (2006). Neural Network Meta learning for Credit Scoring. Intelligent Computing, 403-408.
+- Lai, K. K., Yu, L., Wang, S., Zhou, L. (2006). Neural Network Meta Learning for Credit Scoring. Intelligent Computing, 403-408.
+- Stuart A. Gabriel and Stuarts. Rosenthal (1989), Credit Rationing, Race, And The Mortgage Market, Journal of Urban Economics 29, 371-379 (1991)
+- Edward C. Lawrence, L. Douglas Smith (1991), An Analysis of Default Risk in Mobile Home Credit, Journal of Banking and Finance 16 (1992) 299-312. North-Holland
+- William J. Boyes, Dennis L. Hoffman and Stuart A. Low (1989), An Econometric Analysis of the Bank Credit Scoring Problem, Journal of Econometrics 40 (1989) 3-14. North-Holland
+- Manski, C.F. And S.R. Lerman, 1977, The Estimation of Choice Probabilities from Choice-Based Samples, Econometrica 45, 1977-1988.
+- Heckman, J.J., 1979, Sample Selection Bias as A Specification Error, Econometrica 47, 153-162
+- Venkat Srinivasan and Yong H. Kim, Credit Granting: A Comparative Analysis of Classification Procedures, The Journal of Finance * VOL. XLII, NO. 3 * JULY 1987
+- Nicholas W. Hillman, College On Credit: A Multilevel Analysis of Student Loan Default, The Review of Higher Education, Winter 2014, Volume 37, No. 2, Pp. 169–195
+- T Bellotti and J Crook, Credit Scoring with Macroeconomic Variables Using Survival Analysis, Journal of The Operational Research Society (2009) 60, 1699--1707
+- Thomas LC, Edelman DB and Crook JN (2002). Credit Scoring and Its Applications. SIAM Monographs On Mathematical Modeling and Computation. SIAM: Philadelphia, USA.
+- João A. Bastos, Forecasting Bank Loans Loss-Given-Default, Journal of Banking & Finance 34 (2010) 2510–2517
+- Stephanie Moulton, Donald R. Haurin, Wei Shi, An analysis of default risk in the Home Equity Conversion Mortgage (HECM) program, Journal of Urban Economics 90 (2015) 17–34
