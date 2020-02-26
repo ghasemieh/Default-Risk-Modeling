@@ -1,9 +1,7 @@
 # Default Risk Modeling
 Data Analysis and Modeling
 
-<p align="center">
-  <img src="/Default-Risk-Modeling/image/defaultRisk.jpg">
-</p>
+  <img src="/image/defaultRisk.jpg">
 
 ## Introduction 
 Home Credit is looking for a model to predict the possibility of loan repayment for their clients based on the information about applicants’ applications, credit card history, account balance and etc. The dataset contains of 7 relational tables. 
